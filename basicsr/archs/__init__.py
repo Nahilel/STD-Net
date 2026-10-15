@@ -18,3 +18,4 @@ def build_network(opt: dict):
     network_type = opt.pop("type")
     net = ARCH_REGISTRY.get(network_type)(**opt)
     return net
+

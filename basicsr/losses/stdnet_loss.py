@@ -146,3 +146,4 @@ class STDNetLoss(nn.Module):
             "L6": L6,
             "L7": L7,
         }
+

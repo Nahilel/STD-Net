@@ -183,3 +183,4 @@ class RetinalSegmentationTransform:
         image = TF.normalize(image, mean, std)
 
         return image, masks
+

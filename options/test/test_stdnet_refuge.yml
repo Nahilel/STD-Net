@@ -1,0 +1,43 @@
+# ------------------------------------------------------------------------
+# BasicSR Test Configuration: STD-Net on REFUGE Dataset
+# ------------------------------------------------------------------------
+
+name: Test_STDNet_REFUGE
+model_type: STDNetModel
+num_gpu: 1
+manual_seed: 42
+
+# Dataset and DataLoader settings
+datasets:
+  test:
+    name: REFUGE_Test
+    type: REFUGEDataset
+    images_dir: data/REFUGE/test/Images_Cropped
+    masks_dir: data/REFUGE/test/Masks_Cropped
+    phase: test
+    image_size: [512, 512]
+    use_polar: false
+    mean: [0.5, 0.5, 0.5]
+    std: [0.5, 0.5, 0.5]
+    batch_size: 1
+    num_workers: 2
+
+# Network architecture
+network_g:
+  type: STDNetFullModel
+  img_channels: 3
+  texture_channels: 3
+  hidden_dim: 64
+  img_size: 512
+  num_classes: 2
+
+# Path settings
+path:
+  pretrain_network_g: experiments/STDNet_REFUGE/models/net_g_best.pth
+  strict_load_g: true
+
+# Validation / Evaluation settings
+val:
+  save_img: true
+  threshold: 0.5
+

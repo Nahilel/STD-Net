@@ -173,3 +173,4 @@ class ORIGADataset(Dataset):
             "glaucoma": int(row.get("Glaucoma", 0)),
             "cdr": float(row.get("ExpCDR", 0.0)),
         }
+

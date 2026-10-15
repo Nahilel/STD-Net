@@ -165,3 +165,4 @@ class DRIVEDataset(Dataset):
             sample["gt2"] = (masks["gt2"] > 0.5).float()
 
         return sample
+

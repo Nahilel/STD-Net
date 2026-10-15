@@ -216,3 +216,4 @@ class STDNetModel(BaseModel):
 
     def get_current_log(self) -> dict:
         return self.log_dict
+

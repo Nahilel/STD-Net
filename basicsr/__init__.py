@@ -6,3 +6,4 @@ from basicsr.models import *
 from basicsr.utils import *
 
 __version__ = "1.4.2"
+

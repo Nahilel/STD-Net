@@ -117,3 +117,4 @@ class BaseModel(ABC):
         net = net.module if hasattr(net, "module") else net
         num_params = sum(map(lambda x: x.numel(), net.parameters()))
         return str(net), num_params
+

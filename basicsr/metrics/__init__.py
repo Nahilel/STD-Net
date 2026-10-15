@@ -12,3 +12,4 @@ __all__ = [
 def calculate_metric(data: dict, opt: dict):
     metric_type = opt["type"]
     return METRIC_REGISTRY.get(metric_type)(**data)
+

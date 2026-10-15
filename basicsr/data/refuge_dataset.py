@@ -127,3 +127,4 @@ class REFUGEDataset(Dataset):
             "name": img_name,
             "filename": img_name,
         }
+

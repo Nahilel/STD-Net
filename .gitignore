@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Experiment outputs
+experiments/
+results/
+tb_logger/
+*.pth
+
+# IDE & OS
+.vscode/
+.idea/
+.ipynb_checkpoints/
+Thumbs.db
+

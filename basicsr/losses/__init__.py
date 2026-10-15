@@ -17,3 +17,4 @@ def build_loss(opt: dict):
     loss_type = opt.pop("type")
     loss = LOSS_REGISTRY.get(loss_type)(**opt)
     return loss
+

@@ -15,3 +15,4 @@ def build_model(opt: dict):
     model_type = opt.get("model_type", "STDNetModel")
     model = MODEL_REGISTRY.get(model_type)(opt)
     return model
+

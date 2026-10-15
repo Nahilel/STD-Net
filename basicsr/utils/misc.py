@@ -76,3 +76,4 @@ def check_resume(opt: dict, resume_iter: int = None):
     resume_state = opt.get("path", {}).get("resume_state")
     if resume_state is not None:
         print(f"Resuming training from: {resume_state}", flush=True)
+

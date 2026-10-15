@@ -1,0 +1,45 @@
+# ------------------------------------------------------------------------
+# BasicSR Test Configuration: STD-Net on ORIGA Dataset
+# ------------------------------------------------------------------------
+
+name: Test_STDNet_ORIGA
+model_type: STDNetModel
+num_gpu: 1
+manual_seed: 42
+
+# Dataset and DataLoader settings
+datasets:
+  test:
+    name: ORIGA_Test
+    type: ORIGADataset
+    csv_path: data/ORIGA/OrigaList.csv
+    images_dir: data/ORIGA/Images_Cropped
+    masks_dir: data/ORIGA/Masks_Cropped
+    split: test
+    phase: test
+    image_size: [256, 256]
+    use_polar: true
+    mean: [0.5, 0.5, 0.5]
+    std: [0.5, 0.5, 0.5]
+    batch_size: 1
+    num_workers: 2
+
+# Network architecture
+network_g:
+  type: STDNetFullModel
+  img_channels: 3
+  texture_channels: 3
+  hidden_dim: 64
+  img_size: 256
+  num_classes: 2
+
+# Path settings
+path:
+  pretrain_network_g: experiments/STDNet_ORIGA/models/net_g_best.pth
+  strict_load_g: true
+
+# Validation / Evaluation settings
+val:
+  save_img: true
+  threshold: 0.5
+

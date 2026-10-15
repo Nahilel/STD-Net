@@ -73,3 +73,4 @@ def init_tb_logger(log_dir: str):
         return tb_logger
     except Exception:
         return None
+

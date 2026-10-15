@@ -59,3 +59,4 @@ MODEL_REGISTRY = Registry("model")
 DATASET_REGISTRY = Registry("dataset")
 LOSS_REGISTRY = Registry("loss")
 METRIC_REGISTRY = Registry("metric")
+

@@ -268,3 +268,4 @@ class STDNetFullModel(nn.Module):
         extracted_structure = self.texture_block(texture)
         seg_final, seg5, seg6, seg7 = self.mnet(structure, extracted_structure)
         return seg_final, seg5, seg6, seg7, texture, extracted_structure, structure
+

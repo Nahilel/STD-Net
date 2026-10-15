@@ -199,3 +199,4 @@ def save_origa_visual_sample(
     plt.tight_layout()
     plt.savefig(save_path, bbox_inches="tight", dpi=150)
     plt.close(fig)
+
