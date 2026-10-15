@@ -1,0 +1,85 @@
+# ------------------------------------------------------------------------
+# BasicSR Training Configuration: STD-Net on ORIGA Dataset (Disc + Cup)
+# ------------------------------------------------------------------------
+
+name: STDNet_ORIGA
+model_type: STDNetModel
+num_gpu: 1
+manual_seed: 42
+
+# Dataset and DataLoader settings
+datasets:
+  train:
+    name: ORIGA_Train
+    type: ORIGADataset
+    csv_path: data/ORIGA/OrigaList.csv
+    images_dir: data/ORIGA/Images_Cropped
+    masks_dir: data/ORIGA/Masks_Cropped
+    split: train
+    phase: train
+    image_size: [256, 256]
+    use_polar: true
+    rotation_deg: 15.0
+    mean: [0.5, 0.5, 0.5]
+    std: [0.5, 0.5, 0.5]
+    batch_size: 2
+    num_workers: 2
+
+  val:
+    name: ORIGA_Val
+    type: ORIGADataset
+    csv_path: data/ORIGA/OrigaList.csv
+    images_dir: data/ORIGA/Images_Cropped
+    masks_dir: data/ORIGA/Masks_Cropped
+    split: test
+    phase: val
+    image_size: [256, 256]
+    use_polar: true
+    mean: [0.5, 0.5, 0.5]
+    std: [0.5, 0.5, 0.5]
+    batch_size: 1
+    num_workers: 2
+
+# Network architecture
+network_g:
+  type: STDNetFullModel
+  img_channels: 3
+  texture_channels: 3
+  hidden_dim: 64
+  img_size: 256
+  num_classes: 2
+
+# Training hyperparameters
+train:
+  total_epochs: 80
+  val_freq: 1
+
+  optim_g:
+    type: Adam
+    lr: !!float 1e-3
+    weight_decay: 0
+
+  scheduler:
+    type: ReduceLROnPlateau
+    mode: min
+    factor: 0.5
+    patience: 10
+    min_lr: !!float 1e-6
+
+  loss:
+    type: STDNetLoss
+    mu: 0.001
+    lam: 1.0
+    seg_weights: [1.0, 0.3, 0.1, 0.05]
+
+# Validation and logging settings
+val:
+  val_freq: 1
+  save_img: true
+  threshold: 0.5
+
+# Logging settings
+logger:
+  print_freq: 1
+  save_checkpoint_freq: 10
+  use_tb_logger: true

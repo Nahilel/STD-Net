@@ -1,0 +1,85 @@
+# ------------------------------------------------------------------------
+# BasicSR Training Configuration: STD-Net on DRIVE Dataset
+# ------------------------------------------------------------------------
+
+name: STDNet_DRIVE
+model_type: STDNetModel
+num_gpu: 1
+manual_seed: 42
+
+# Dataset and DataLoader settings
+datasets:
+  train:
+    name: DRIVE_Train
+    type: DRIVEDataset
+    images_dir: data/DRIVE/training/images
+    fov_dir: data/DRIVE/training/mask
+    gt_dir: data/DRIVE/training/1st_manual
+    split: train
+    phase: train
+    image_size: [512, 512]
+    apply_clahe: true
+    rotation_deg: 15.0
+    mean: [0.485, 0.456, 0.406]
+    std: [0.229, 0.224, 0.225]
+    batch_size: 2
+    num_workers: 2
+
+  val:
+    name: DRIVE_Val
+    type: DRIVEDataset
+    images_dir: data/DRIVE/test/images
+    fov_dir: data/DRIVE/test/mask
+    gt_dir: data/DRIVE/test/1st_manual
+    split: test
+    phase: val
+    image_size: [512, 512]
+    apply_clahe: true
+    mean: [0.485, 0.456, 0.406]
+    std: [0.229, 0.224, 0.225]
+    batch_size: 1
+    num_workers: 2
+
+# Network architecture
+network_g:
+  type: STDNetFullModel
+  img_channels: 3
+  texture_channels: 3
+  hidden_dim: 64
+  img_size: 512
+  num_classes: 1
+
+# Training hyperparameters
+train:
+  total_epochs: 150
+  val_freq: 1
+
+  optim_g:
+    type: Adam
+    lr: !!float 1e-3
+    weight_decay: 0
+
+  scheduler:
+    type: ReduceLROnPlateau
+    mode: min
+    factor: 0.5
+    patience: 10
+    min_lr: !!float 1e-6
+
+  loss:
+    type: STDNetLoss
+    mu: 0.001
+    lam: 1.0
+    seg_weights: [1.0, 0.3, 0.1, 0.05]
+
+# Validation and logging settings
+val:
+  val_freq: 1
+  save_img: true
+  threshold: 0.5
+
+# Logging settings
+logger:
+  print_freq: 1
+  save_checkpoint_freq: 10
+  use_tb_logger: true
