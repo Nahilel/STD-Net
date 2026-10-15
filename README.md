@@ -19,47 +19,19 @@ This approach solves this by explicitly **demixing** the input image into its st
 Retinal_Image_Segmentation/
 ├── basicsr/
 │   ├── archs/                          # Model architectures & neural components
-│   │   ├── __init__.py                 # Network builder
-│   │   └── stdnet_arch.py              # STDNetFullModel, STDModule, TextureBlock, AdaptiveNorm, MNet
 │   ├── data/                           # Datasets, dataloaders, and transforms
-│   │   ├── __init__.py                 # Dataset builder & dataloaders
-│   │   ├── transforms.py               # CLAHE, Polar transform, RetinalSegmentationTransform
-│   │   ├── drive_dataset.py            # DRIVEDataset (Vessel segmentation)
-│   │   ├── origa_dataset.py            # ORIGADataset (Optic Disc & Cup segmentation)
-│   │   └── refuge_dataset.py           # REFUGEDataset (Optic Disc & Cup segmentation)
 │   ├── losses/                         # Mathematical loss formulations
-│   │   ├── __init__.py                 # Loss builder
-│   │   └── stdnet_loss.py              # TVLoss, TextureL1Loss, MaskedBCELoss, MultiScaleSegLoss, STDNetLoss
 │   ├── metrics/                        # Quantitative validation & test metrics
-│   │   ├── __init__.py                 # Metric calculation
-│   │   └── seg_metrics.py              # DRIVE metrics (Acc, AUC, Sen, Spe, IOU), Overlapping Error (OE)
 │   ├── models/                         # Model lifecycle wrappers & managers
-│   │   ├── __init__.py                 # Model builder
-│   │   ├── base_model.py               # BaseModel (optimizers, schedulers, checkpointing)
-│   │   └── stdnet_model.py             # STDNetModel (feed_data, optimize, test, validation, visuals)
 │   └── utils/                          # Common utilities and registries
-│       ├── __init__.py
-│       ├── registry.py                 # Registry pattern
-│       ├── options.py                  # YAML parser and configuration loader
-│       ├── logger.py                   # Root logger, MessageLogger, and TensorBoard logger
-│       ├── misc.py                     # Seed setting, directory management, resume helpers
-│       └── img_util.py                 # tensor2img & multi-panel sample visualizer
 ├── options/                            # Experiment configurations
 │   ├── train/
-│   │   ├── train_stdnet_drive.yml      # Training configuration for DRIVE
-│   │   ├── train_stdnet_origa.yml      # Training configuration for ORIGA
-│   │   └── train_stdnet_refuge.yml     # Training configuration for REFUGE
 │   └── test/
-│       ├── test_stdnet_drive.yml       # Evaluation configuration for DRIVE
-│       ├── test_stdnet_origa.yml       # Evaluation configuration for ORIGA
-│       └── test_stdnet_refuge.yml      # Evaluation configuration for REFUGE
 ├── train.py                            # Unified training entry point
 ├── test.py                             # Unified evaluation entry point
 ├── infer.py                            # Lightweight inference script (single image or folder)
 ├── requirements.txt                    # Project dependencies
 ├── setup.py                            # Package setup
-├── retinal_segmentation_basicsr.ipynb  # Interactive demonstration notebook
-└── retinal_segmentation.ipynb          # Original notebook
 ```
 
 ---
